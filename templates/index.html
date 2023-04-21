@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask-SocketIO Example</title>
+    <style>
+        form {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+        socket.on('result', function(data) {
+            var resultElement = document.getElementById('result');
+            resultElement.innerHTML = data;
+        });
+        function submitForm(event) {
+            event.preventDefault();
+            var urlElement = document.getElementById('url');
+            var url = urlElement.value;
+            socket.emit('submit', url);
+        }
+    </script>
+</head>
+<body>
+    <form onsubmit="submitForm(event)">
+        URL: <input type="text" id="url">
+        <input type="submit" value="Submit">
+    </form>
+    <div id="result"></div>
+    <progress value="0" max="100"></progress>
+</body>
+</html>
