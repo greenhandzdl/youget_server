@@ -4,6 +4,7 @@ import subprocess
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
+app.run(host='0.0.0.0', port='5000')
 socketio = SocketIO(app)
 
 @app.route('/')
