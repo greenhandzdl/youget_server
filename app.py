@@ -4,7 +4,6 @@ import subprocess
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
-app.run(host='0.0.0.0', port='5000')
 socketio = SocketIO(app)
 
 @app.route('/')
@@ -18,4 +17,4 @@ def handle_submit(url):
     socketio.emit('result', output.decode('utf-8'))
 
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app,host='0.0.0.0')
